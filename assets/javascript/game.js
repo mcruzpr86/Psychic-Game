@@ -7,6 +7,7 @@
     let losses = 0; 
     let letters = []
     let guessCount = 10; 
+    let guessesSoFar = []
     let corretGuess = false
 
     //onkeyup this function will randomize the guesses
@@ -22,14 +23,16 @@
         }else{ 
             //if wrong will log how many guesses left before you get a loss
             console.log("guesses left: " + guessCount--);
-            document.getElementById ('wins').innerText='Wins: '+ wins;
+            guessesSoFar.push(event.key)
+            document.getElementById ('letter').innerText='Guesses Left: '+ guessesSoFar.join(" ");
             letters.push (event.key)
             console.log (letters)
+            document.getElementById ('guessesLeft').innerText='Guesses Left: '+ guessCount;
         } 
         //logs losses after every 10 wrong guesses then resets after the 10th wrong guess
         if(guessCount <=0){
             console.log (losses = losses + 1)
-            document.getElementById ('losses').innerText='Losses: '+ losses;
+            document.getElementById ('lose').innerText='Losses: '+ losses;
             guessCount = 10
             letters = []
         }
