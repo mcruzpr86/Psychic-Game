@@ -22,7 +22,7 @@
         }else{ 
             //if wrong will log how many guesses left before you get a loss
             console.log("guesses left: " + guessCount--);
-            document.getElementById ('guessCount').innerText='Guesses left: '+ guessCount;
+            document.getElementById ('wins').innerText='Wins: '+ wins;
             letters.push (event.key)
             console.log (letters)
         } 
