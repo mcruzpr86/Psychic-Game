@@ -1,51 +1,44 @@
-// The specific letters that the user typed.
-let guesses = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 
-// Setting for zero
-let wins = 0;
-let losses = 0;
-let guessesLeft = 9;
-let letterUser = [];
-let eachofLetters = null;
+    //Create variables 
+    var choices = [...Array(26).keys()].map(i => String.fromCharCode(i + 97));  
+    //math.random because computer picks at random. 
+    //Array of choices that holds all the letters in them.
+    let wins = 0; 
+    let losses = 0; 
+    let letters = []
+    let guessCount = 10; 
+    let corretGuess = false
+
+    //onkeyup this function will randomize the guesses
+    document.onkeyup = function(event) {
+        userguess = event.key;
+        let computerguess = choices[Math.floor(Math.random() * choices.length)];
+        console.log(userguess); 
+        console.log(computerguess);
+     //if statement logs user guesses vs computer guesses if it matches you get a win   
+        if(userguess === computerguess){
+            console.log("wins:" + wins++);
+            document.getElementById ('wins').innerText='Wins: '+ wins;
+        }else{ 
+            //if wrong will log how many guesses left before you get a loss
+            console.log("guesses left: " + guessCount--);
+            document.getElementById ('guessCount').innerText='Guesses left: '+ guessCount;
+            letters.push (event.key)
+            console.log (letters)
+        } 
+        //logs losses after every 10 wrong guesses then resets after the 10th wrong guess
+        if(guessCount <=0){
+            console.log (losses = losses + 1)
+            document.getElementById ('losses').innerText='Losses: '+ losses;
+            guessCount = 10
+            letters = []
+        }
 
 
-// Sets the computerGuess variable equal to a random choice from the computerChoice array.
-var computerGuess = guesses[Math.floor(Math.random() * guesses.length)];
 
-function countGuessesLeft() {
-	document.querySelector("#guessesLeft").innerHTML = "Guesses Left: " + guessesLeft;
-}
 
-function farUserGuesses() {
-	document.querySelector("#letter").innerHTML = "Your Guesses so far: " + letterUser.join(' ');
-}
-
-countGuessesLeft();
-
-var restart = function() {
-	guessesLeft = 9;
-	letterUser = [];
-	var computerGuess = guesses[Math.floor(Math.random() * guesses.length)];
-}
-
-// When the user presses a key, it will run the following function..
-document.onkeyup = function(event) {
-	guessesLeft--;
-
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
-
-	letterUser.push(userGuess);
-	countGuessesLeft();
-	farUserGuesses();
-
-	if (userGuess === computerGuess){
-		wins++;
-		document.querySelector("#wins").innerHTML = "Wins: " + wins;
-		restart();
-	} 
-	else if (guessesLeft === 0) {
-		losses++;
-		document.querySelector("#lose").innerHTML = "Loses: " + losses;
-		restart();
-	}
-  };
+    // Onkey function that stores user choice. 
+    // if / else statement that compares that userchoice to computer choice. 
+    }
+    
+    
